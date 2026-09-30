@@ -22,6 +22,28 @@ The ML system will predict the probability that a hotel reservation will be canc
 
 ## :building_construction: Model Architecture
 
+
+├── hotel_bookings.csv
+
+├── hotel_bookings_cleaned.csv
+
+├── hotel_bookings_train.csv
+
+├── hotel_bookings_test.csv
+
+├── hotel_bookings_prod.csv
+
+│
+
+├── prediction.py
+
+├── dashboard.py
+
+│
+
+└── random_forest_model.pkl
+
+
 ## :chart_with_upwards_trend: Performance Metrics
 
 ## :test_tube: Testing & Validation
