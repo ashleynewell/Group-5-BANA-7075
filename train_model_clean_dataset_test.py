@@ -226,3 +226,21 @@ with mlflow.start_run(run_name="Random Forest first model"):
     )
 
     print("MLflow run saved")
+
+## Saves the Model to become a predictor and connect to the dashboard ##
+    import joblib
+
+    # Train the Random Forest
+    model = RandomForestClassifier(
+        n_estimators=50,
+        max_depth=10,
+        random_state=42,
+        n_jobs=-1
+    )
+
+    model.fit(X_train, y.loc[train])
+
+    # Save the trained model
+    joblib.dump(model, "hotel_cancellation_predictor.pkl")
+
+    print("Random Forest model saved!")
