@@ -86,3 +86,24 @@ Updated on MONTH DAY 2026 Version XX.XX
 ## :page_facing_up: License
 This project is not licensed for external use. All rights reserved.
 
+## Running the modeling scripts
+
+Place `hotel_bookings.csv` in the same folder as the Python scripts.
+
+Run data preparation once, or again when the source dataset or cleaning logic changes:
+
+```powershell
+py .\prepare_data.py
+```
+
+Then run training, comparison, and evaluation:
+
+```powershell
+py .\train_model_clean_dataset_test.py
+py .\compare_model_clean_dataset_test.py
+py .\evaluate_model_clean_dataset_test.py
+```
+
+These scripts reuse `hotel_bookings_cleaned.csv`. Training saves the same trained Random Forest to MLflow and `hotel_cancellation_predictor.pkl`, without training it twice.
+
+The evaluation script currently loads version 1 of `HotelCancellation` from the local MLflow database.
