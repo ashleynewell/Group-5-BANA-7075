@@ -67,6 +67,14 @@ The Random Forest model is also compared against:
 - A simple cancellation-rate baseline
 - Logistic Regression
 
+### Final Test Results
+
+- **Test bookings:** 17,735
+- **Version 1 Random Forest test Brier Score:** 0.2188
+- **Test baseline Brier Score:** 0.2360
+
+Because a lower Brier Score is better, the registered Version 1 model performed better than the simple baseline on the test data.
+
 ## 🧪 Testing & Validation
 
 The project uses time-based validation so that later hotel reservations are used to evaluate models trained on earlier reservations.
@@ -90,7 +98,12 @@ The final model is evaluated on the test period after model development and comp
 - Model evaluation using Brier Score
 - Local saved prediction model
 - CSV-based reservation input
-- Tkinter prediction dashboard
+- Improved dashboard user interface with upload and clear buttons
+- Sorting and filtering capabilities
+- Easy-to-read summary table with customizable booking information
+- Quantitative summary of total bookings and high- and low-risk counts
+- Conditional metric coloring for cancellation risk
+- Current high/low risk threshold set at 50%, with the ability to adjust the threshold
 - DVC-ready dataset versioning workflow
 
 ## 💡 Use Cases
@@ -194,7 +207,7 @@ py .\Dashboard.py
 
 Select a properly formatted reservation CSV file when prompted.
 
-The dashboard will display the predicted cancellation probability.
+The dashboard displays cancellation-risk results in a summary table and supports sorting, filtering, and customizable views. It also provides total booking counts and high- and low-risk counts. Risk coloring is currently based on a 50% cancellation-probability threshold, which can be changed depending on the desired risk tolerance.
 
 ## 🤝 Contributing
 
