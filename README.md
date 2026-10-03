@@ -8,6 +8,7 @@ This information can help hotels better manage cancellations, plan for demand, a
 
 ## Table of Contents
 
+- 👥 Team Members
 - 📁 Data Sources
 - 🏗️ Model Architecture
 - 📈 Performance Metrics
@@ -21,6 +22,14 @@ This information can help hotels better manage cancellations, plan for demand, a
 - 📚 Documentation
 - ⏳ History
 - 📄 License
+
+## 👥 Team Members
+
+- Jaime Davis
+- Nichole Fox
+- Ashley Newell
+- Guillermo Del Rio Gonzalez
+- Sara Zhao
 
 ## 📁 Data Sources
 
