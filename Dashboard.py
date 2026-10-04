@@ -6,7 +6,7 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 import pandas as pd
-from Prediction import make_prediction
+import requests
 from datetime import datetime
 
 
@@ -29,6 +29,7 @@ COLORS = {
 # GLOBAL DATA
 
 results_df = None
+API_URL = "http://127.0.0.1:8000/predict"
 
 
 
@@ -216,18 +217,46 @@ def upload_csv():
             )
 
 
-        # RUN RANDOM FOREST
-        probabilities = make_prediction(file_path)
+        # RUN RANDOM FOREST THROUGH FASTAPI
+        model_columns = [
+            "lead_time",
+            "stays_in_weekend_nights",
+            "stays_in_week_nights",
+            "num_adults",
+            "num_children",
+            "num_babies"
+        ]
 
+        missing_model_columns = [
+            column for column in model_columns
+            if column not in df.columns
+        ]
 
-        # CHECK PREDICTION COUNT
-        if len(probabilities) != len(df):
-
+        if missing_model_columns:
             raise ValueError(
-                f"The model returned "
-                f"{len(probabilities)} predictions "
-                f"for {len(df)} CSV rows."
+                "Missing model columns: "
+                + ", ".join(missing_model_columns)
             )
+
+        probabilities = []
+
+        for _, row in df.iterrows():
+            payload = {
+                column: float(row[column]) if pd.notna(row[column]) else 0.0
+                for column in model_columns
+            }
+
+            try:
+                response = requests.post(API_URL, json=payload, timeout=10)
+                response.raise_for_status()
+            except requests.RequestException as api_error:
+                raise ConnectionError(
+                    "Could not connect to the prediction API. "
+                    "Start it with: python -m uvicorn api:app --reload"
+                ) from api_error
+
+            result = response.json()
+            probabilities.append(result["cancellation_probability"])
 
 
         # ADD PROBABILITY TO DATAFRAME
